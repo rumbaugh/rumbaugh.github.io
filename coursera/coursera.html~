@@ -1,0 +1,11 @@
+<html>
+<!-- Coursera projects-->
+<head>
+<title>coursera</title>
+</head>
+<body>
+<h1>Coursera Projects</h1>
+<p>These are projects I've worked on for Coursera courses. Most of them are pretty minor projects and are included here for organizational purpsoes mainly, except for a few like the Data Science Capstone.</p>
+<h3><a href="https://www.coursera.org/specializations/jhu-data-science">Data Science Specialization</a></h3>
+<p>A series of 10 courses offered by Johns Hopkins University. The course is taught in R and covers a range of topics related to working as a data scientist.</p>
+
