@@ -795,11 +795,11 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>Next Word Prediction?</h3>
 <div class="slideContent" >
-<p>In our world of ubiquitous smartphones, we spend a good portion of our day typing furiously into them. Composing text messages, emails, Facebook posts, we&#39;re tapping those little keyboards on our screens quite a bit. Some of us have developing rapid typing speeds, but not everyone has, and everyone would like to type even faster if they could. It would be a lot more efficient if we could tap out one word at a time instead of one character.</p>
+<p><small>In our world of ubiquitous smartphones, we spend a good portion of our day typing furiously into them. Composing text messages, emails, Facebook posts, we&#39;re tapping those little keyboards on our screens quite a bit. Some of us have developing rapid typing speeds, but not everyone has, and everyone would like to type even faster if they could. It would be a lot more efficient if we could tap out one word at a time instead of one character.</p>
 
 <p>A number of apps have been developed that allow you to do just that. It&#39;s infeasible to present all possible words to be typed, so this application requires next word prediction. If you know what word the user wants to type next, you can present them with it and all they need to do is tap on it to type it out. Based on the average length of words, this potentially improve your efficiency by up to about 85%. </p>
 
-<p>In reality, it&#39;s very difficult to guess exactly what a user wants to type next, and so one is better off instead presenting a set of possible likely words to choose from. How many? Three is a nice round number that everyone likes. I have made an application to carry out this task. Type out a message, and it presents what it thinks the three mostly likely next words will be.</p>
+<p>In reality, it&#39;s very difficult to guess exactly what a user wants to type next, and so one is better off instead presenting a set of possible likely words to choose from. How many? Three is a nice round number that everyone likes. I have made an application to carry out this task. Type out a message, and it presents what it thinks the three mostly likely next words will be.</small></p>
 
 </div>
 
@@ -807,9 +807,9 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>N-Gram Modeling</h3>
 <div class="column column1 slideContent" >
-<p>One of the most common methods for next word prediction is N-gram modeling. The basic idea behind the method is to compile the statistics of how often every N-gram (sequence of N words) occurs in some training set, look at the last N words typed, and find the most common N+1-grams that complete it. We use some methods on top of that, Kneser-Ney smoothing and a backoff model, which relate the probabilities of a word to how often it occurs in unfamiliar contexts and uses an (N-1)-gram instead of an N-gram if that N-gram isn&#39;t found in the corpus or is low probability. </p>
+<p><small>One of the most common methods for next word prediction is N-gram modeling. The basic idea behind the method is to compile the statistics of how often every N-gram (sequence of N words) occurs in some training set, look at the last N words typed, and find the most common N+1-grams that complete it. We use some methods on top of that, Kneser-Ney smoothing and a backoff model, which relate the probabilities of a word to how often it occurs in unfamiliar contexts and uses an (N-1)-gram instead of an N-gram if that N-gram isn&#39;t found in the corpus or is low probability. </p>
 
-<p>The most important parameter in an N-gram model is N. This could be as high as you want, but there are diminishing returns to accuracy as N increases. I tried using N up to 5, and found that using higher than a trigram model increased accuracy by negligible amounts. </p>
+<p>The most important parameter in an N-gram model is N. This could be as high as you want, but there are diminishing returns to accuracy as N increases. I tried using N up to 5, and found that using higher than a trigram model increased accuracy by negligible amounts. </small></p>
 
 
 </div>
@@ -825,7 +825,7 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>Speed and Memory</h3>
 <div class="slideContent" >
-<p>There are other methods for next word prediction, with recurrent neural networks preforming well. Why not use them instead? Our use case is mobile phones, which would struggle with an RNN. The method needs to scale down well, which N-gram models do. The table below summarizes the advantages over RNNs.</p>
+<p><small>There are other methods for next word prediction, with recurrent neural networks preforming well. Why not use them instead? Our use case is mobile phones, which would struggle with an RNN. The method needs to scale down well, which N-gram models do. The table below summarizes the advantages over RNNs.</small></p>
 
 <table>
 <caption>Model Comparison</caption>
@@ -840,38 +840,32 @@ hljs.initHighlightingOnLoad();
 <tbody>
   <tr>
    <td style="text-align:left;"> 5-gram </td>
-   <td style="text-align:right;"> 210.00 </td>
+   <td style="text-align:right;"> 210 </td>
    <td style="text-align:right;"> 490 </td>
    <td style="text-align:right;"> 21.6 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 4-gram </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 400 </td>
-   <td style="text-align:right;"> 21.6 </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> Trigram </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 400 </td>
+   <td style="text-align:right;"> 160 </td>
+   <td style="text-align:right;"> 300 </td>
    <td style="text-align:right;"> 21.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Trigram (opt.) </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 400 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 14 </td>
    <td style="text-align:right;"> 20.5 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> LSTM </td>
-   <td style="text-align:right;"> 2100.00 </td>
+   <td style="text-align:right;"> 2100 </td>
    <td style="text-align:right;"> 210 </td>
    <td style="text-align:right;"> 13.0 </td>
   </tr>
 </tbody>
 </table>
 
-<p>Our N-gram model makes predictions over 10 times faster than even a scaled-down LSTM using only about 2% of the same dataset. In addition, I was able to pare down the model to use only about 2.5 MB of storage, making some concesions such as dropping N-grams that occured 10 times or fewer and, for every bigram, only keeping the top three most probably trigrams that complete it. </p>
+<p><small>Our N-gram model makes predictions over 10 times faster than even a scaled-down LSTM using only about 2% of the same dataset. In addition, I was able to pare down the model to use only about 2.5 MB of storage, making some concesions such as dropping N-grams that occured 10 times or fewer and, for every bigram, only keeping the top three most probably trigrams that complete it. </small></p>
 
 </div>
 
@@ -879,11 +873,11 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>Conclusions</h3>
 <div class="slideContent" >
-<p>The finished next word prediction app using trigram modeling is available at <a href="https://rumbaugh.shinyapps.io/NextWordPredict">https://rumbaugh.shinyapps.io/NextWordPredict</a>. </p>
+<p><small>The finished next word prediction app using trigram modeling is available at <a href="https://rumbaugh.shinyapps.io/NextWordPredict">https://rumbaugh.shinyapps.io/NextWordPredict</a>. </p>
 
 <p>Just starting typing in a message and it will suggest three options for the next word. Click on one to insert it in your sentence. It recognizes commas and sentence-ending punctuation, and will try to apply the correct capitalization based on how the word was written out most often in the corpus. </p>
 
-<p>The app was trained on a data set including blog posts, news articles, and Twitter posts, and works best when encountering similar writing styles and contents. When testing on a validation set from the corpus, accuracy was around 20%. Memory usage is minimal, and testing shows it runs without noticeable delay on an iPhone 6S (2GB RAM). </p>
+<p>The app was trained on a data set including blog posts, news articles, and Twitter posts, and works best when encountering similar writing styles and contents. When testing on a validation set from the corpus, accuracy was around 20%. Memory usage is minimal, and testing shows it runs without noticeable delay on an iPhone 6S (2GB RAM).</small></p>
 
 </div>
 
